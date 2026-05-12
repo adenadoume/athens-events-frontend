@@ -5,11 +5,11 @@ import { LoadingSkeleton } from './LoadingSkeleton'
 interface Props {
   events: Event[]
   loading: boolean
-  error: string | null
+  error?: string | null
   isMock?: boolean
 }
 
-export function EventGrid({ events, loading, error }: Props) {
+export function EventGrid({ events, loading }: Props) {
   if (loading) return <LoadingSkeleton />
 
   if (!events.length) {
