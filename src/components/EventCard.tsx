@@ -1,4 +1,3 @@
-import { MapPin, Calendar, Clock, ExternalLink } from 'lucide-react'
 import type { Event } from '../types/event'
 import { formatDate, formatTime, categoryLabel, sourceLabel, placeholderImage } from '../utils/format'
 
@@ -53,18 +52,9 @@ export function EventCard({ event }: Props) {
         )}
 
         <div className="flex flex-wrap gap-x-3 gap-y-1">
-          <span className="flex items-center gap-1 text-[0.72rem] text-white/50">
-            <Calendar size={11} className="shrink-0" />
-            {formatDate(event.date)}
-          </span>
-          {time && (
-            <span className="flex items-center gap-1 text-[0.72rem] text-white/50">
-              <Clock size={11} className="shrink-0" />
-              {time}
-            </span>
-          )}
-          <span className="flex items-center gap-1 text-[0.72rem] text-white/50">
-            <MapPin size={11} className="shrink-0" />
+          <span className="text-[0.72rem] text-white/50">{formatDate(event.date)}</span>
+          {time && <span className="text-[0.72rem] text-white/50">{time}</span>}
+          <span className="text-[0.72rem] text-white/50">
             {event.venue}{event.location && event.location !== 'Athens' ? `, ${event.location}` : ''}
           </span>
         </div>
@@ -80,11 +70,10 @@ export function EventCard({ event }: Props) {
             href={event.ticket_url || '#'}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-violet-600 hover:bg-cyan-500 text-white text-[0.75rem] font-semibold transition-colors duration-150"
+            className="px-3 py-1.5 rounded-lg bg-violet-600 hover:bg-cyan-500 text-white text-[0.75rem] font-semibold transition-colors duration-150"
             onClick={(e) => !event.ticket_url && e.preventDefault()}
           >
-            Get Tickets
-            <ExternalLink size={11} />
+            Get Tickets →
           </a>
         </div>
       </div>

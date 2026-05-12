@@ -1,4 +1,3 @@
-import { RefreshCw } from 'lucide-react'
 import type { Filters, DateRange } from '../types/event'
 
 interface Props {
@@ -67,9 +66,8 @@ export function FilterBar({ filters, onFilterChange, onRefresh, loading, total }
         <button
           onClick={onRefresh}
           disabled={loading}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/50 bg-cyan-500/10 text-cyan-400 text-xs font-medium transition-all duration-150 hover:bg-cyan-500/20 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="px-3 py-1.5 rounded-lg border border-cyan-500/50 bg-cyan-500/10 text-cyan-400 text-xs font-medium transition-all duration-150 hover:bg-cyan-500/20 disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          <RefreshCw size={13} className={loading ? 'animate-spin' : ''} />
           {loading ? 'Loading…' : 'Refresh'}
         </button>
       </div>
