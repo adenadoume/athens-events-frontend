@@ -6,34 +6,24 @@ interface Props {
   events: Event[]
   loading: boolean
   error: string | null
+  isMock?: boolean
 }
 
 export function EventGrid({ events, loading, error }: Props) {
   if (loading) return <LoadingSkeleton />
 
-  if (error) {
+  if (!events.length) {
     return (
-      <div className="empty-state">
-        <span className="empty-icon">⚡</span>
-        <h3>Connection error</h3>
-        <p>{error}</p>
-        <p className="hint">Make sure the backend is running on Oracle VM and VITE_API_URL is set correctly.</p>
-      </div>
-    )
-  }
-
-  if (events.length === 0) {
-    return (
-      <div className="empty-state">
-        <span className="empty-icon">🎵</span>
-        <h3>No events found</h3>
-        <p>Try a different date range or category, or hit Refresh to fetch live data.</p>
+      <div className="flex flex-col items-center justify-center py-24 text-center gap-3">
+        <span className="text-5xl">🎵</span>
+        <h3 className="text-lg font-semibold text-white/80">No events found</h3>
+        <p className="text-sm text-white/40">Try a different date range or category, or hit Refresh.</p>
       </div>
     )
   }
 
   return (
-    <div className="event-grid">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5">
       {events.map(event => (
         <EventCard key={event.id} event={event} />
       ))}

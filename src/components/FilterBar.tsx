@@ -10,57 +10,67 @@ interface Props {
 }
 
 const CATEGORIES = [
-  { value: 'all', label: 'All Events' },
-  { value: 'concert', label: 'Concerts' },
-  { value: 'dj', label: 'DJ & Electronic' },
-  { value: 'party', label: 'Parties' },
+  { value: 'all',        label: 'All Events' },
+  { value: 'concert',    label: 'Concerts' },
+  { value: 'dj',         label: 'DJ & Electronic' },
+  { value: 'party',      label: 'Parties' },
   { value: 'electronic', label: 'Electronic' },
 ]
 
 const DATE_RANGES: { value: DateRange; label: string }[] = [
-  { value: 'today', label: 'Today' },
+  { value: 'today',        label: 'Today' },
   { value: 'this_weekend', label: 'Weekend' },
-  { value: 'this_week', label: 'This Week' },
-  { value: 'this_month', label: 'This Month' },
+  { value: 'this_week',    label: 'This Week' },
+  { value: 'this_month',   label: 'This Month' },
 ]
+
+function PillBtn({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all duration-150 border ${
+        active
+          ? 'bg-violet-600 border-violet-600 text-white'
+          : 'bg-transparent border-white/10 text-white/50 hover:border-violet-500/60 hover:text-white/80 hover:bg-violet-600/10'
+      }`}
+    >
+      {children}
+    </button>
+  )
+}
 
 export function FilterBar({ filters, onFilterChange, onRefresh, loading, total }: Props) {
   return (
-    <div className="filter-bar">
-      <div className="filter-group">
-        {CATEGORIES.map(cat => (
-          <button
-            key={cat.value}
-            className={`filter-btn ${filters.category === cat.value ? 'active' : ''}`}
-            onClick={() => onFilterChange({ category: cat.value })}
-          >
-            {cat.label}
-          </button>
+    <div className="flex flex-wrap items-center gap-3 mb-6 p-3 rounded-xl bg-[#0f0f1a] border border-white/[0.06]">
+      <div className="flex flex-wrap gap-1.5">
+        {CATEGORIES.map(c => (
+          <PillBtn key={c.value} active={filters.category === c.value} onClick={() => onFilterChange({ category: c.value })}>
+            {c.label}
+          </PillBtn>
         ))}
       </div>
 
-      <div className="filter-group">
-        {DATE_RANGES.map(dr => (
-          <button
-            key={dr.value}
-            className={`filter-btn ${filters.dateRange === dr.value ? 'active' : ''}`}
-            onClick={() => onFilterChange({ dateRange: dr.value })}
-          >
-            {dr.label}
-          </button>
+      <div className="w-px h-5 bg-white/10 hidden sm:block" />
+
+      <div className="flex flex-wrap gap-1.5">
+        {DATE_RANGES.map(d => (
+          <PillBtn key={d.value} active={filters.dateRange === d.value} onClick={() => onFilterChange({ dateRange: d.value })}>
+            {d.label}
+          </PillBtn>
         ))}
       </div>
 
-      <div className="filter-actions">
-        <span className="result-count">{total > 0 ? `${total} events` : ''}</span>
+      <div className="flex items-center gap-3 ml-auto">
+        {total > 0 && (
+          <span className="text-xs text-white/25">{total} events</span>
+        )}
         <button
-          className={`refresh-btn ${loading ? 'spinning' : ''}`}
           onClick={onRefresh}
           disabled={loading}
-          title="Refresh events"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/50 bg-cyan-500/10 text-cyan-400 text-xs font-medium transition-all duration-150 hover:bg-cyan-500/20 disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          <RefreshCw size={16} />
-          {loading ? 'Loading...' : 'Refresh'}
+          <RefreshCw size={13} className={loading ? 'animate-spin' : ''} />
+          {loading ? 'Loading…' : 'Refresh'}
         </button>
       </div>
     </div>
