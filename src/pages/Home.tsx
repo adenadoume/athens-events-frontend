@@ -18,16 +18,13 @@ export function Home() {
       {/* Header */}
       <header className="relative overflow-hidden border-b border-white/[0.06] bg-gradient-to-b from-[#0f0a1e] to-[#08080f]">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(124,58,237,0.18),transparent)] pointer-events-none" />
-        <div className="relative z-10 flex flex-col items-center text-center px-6 py-10">
-          <div className="flex items-center gap-2 mb-2">
+        <div className="relative z-10 flex items-center justify-center px-6 py-10">
+          <div className="flex items-center gap-2">
             <span className="text-4xl">🎶</span>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
               Athens <span className="text-violet-500">Events</span>
             </h1>
           </div>
-          <p className="text-sm text-white/40 tracking-wide">
-            Concerts · DJ Sets · Parties · Nightlife in Athens, Greece
-          </p>
         </div>
       </header>
 
@@ -51,9 +48,7 @@ export function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/[0.05] py-5 text-center text-[0.7rem] text-white/20">
-        Data sourced from Viva.gr · Resident Advisor · TicketSwap · Ticketmaster
-      </footer>
+      <footer className="border-t border-white/[0.05] py-4" />
     </div>
   )
 }
